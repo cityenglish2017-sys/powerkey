@@ -5,12 +5,12 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: linear-gradient(#9de3ff, #ffffff);
+  background: linear-gradient(#aeeaff, #ffffff);
   text-align: center;
   color: #222;
 }
 
-#game {
+#app {
   max-width: 920px;
   margin: 0 auto;
   padding: 14px;
@@ -19,8 +19,8 @@ body {
 header {
   background: #263238;
   color: white;
-  border-radius: 18px;
   padding: 16px;
+  border-radius: 20px;
   margin-bottom: 14px;
 }
 
@@ -32,10 +32,10 @@ h1 {
 .screen {
   display: none;
   background: white;
-  border-radius: 20px;
-  padding: 20px;
   min-height: 620px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+  padding: 20px;
+  border-radius: 22px;
+  box-shadow: 0 5px 18px rgba(0,0,0,0.15);
 }
 
 .screen.active {
@@ -43,13 +43,14 @@ h1 {
 }
 
 button {
-  border: none;
-  border-radius: 14px;
+  margin: 8px;
   padding: 14px 22px;
-  font-size: 22px;
+  border: none;
+  border-radius: 16px;
+  background: #ffca28;
+  font-size: 24px;
   font-weight: bold;
   cursor: pointer;
-  background: #ffca28;
   box-shadow: 0 4px #c99500;
 }
 
@@ -58,66 +59,45 @@ button:active {
   box-shadow: 0 1px #c99500;
 }
 
-.button-row {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-}
-
-.top-info {
+.top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 22px;
+  font-size: 24px;
   font-weight: bold;
 }
 
-.car-grid {
+.grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 18px;
   margin-top: 20px;
 }
 
-.car-card {
+.card {
   border: 4px solid #ddd;
-  border-radius: 18px;
-  padding: 12px;
+  border-radius: 20px;
+  padding: 14px;
   background: #f7f7f7;
   cursor: pointer;
   transition: 0.2s;
 }
 
-.car-card:hover {
+.card:hover {
   transform: scale(1.05);
   border-color: #ffca28;
 }
 
+.car-emoji {
+  font-size: 70px;
+}
+
 .car-name {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: bold;
 }
 
-.car-svg {
-  width: 180px;
-  height: 100px;
-}
-
-.big-car .car-svg {
-  width: 260px;
-  height: 140px;
-}
-
-.light {
-  animation: blink 0.35s infinite alternate;
-}
-
-@keyframes blink {
-  from { opacity: 0.2; }
-  to { opacity: 1; }
-}
-
-.key-grid {
+.key-row {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -125,169 +105,159 @@ button:active {
   margin: 20px 0;
 }
 
-.key-card {
-  width: 130px;
+.key {
+  width: 120px;
   border: 4px solid #ddd;
   border-radius: 18px;
   padding: 12px;
-  background: #fafafa;
   cursor: pointer;
+  background: #fafafa;
 }
 
-.key-card.selected {
+.key.selected {
   border-color: #ffca28;
   background: #fff8d7;
   transform: scale(1.08);
 }
 
-.power-key {
-  width: 85px;
-  height: 34px;
-  border-radius: 12px;
+.key-shape {
+  width: 78px;
+  height: 32px;
   border: 4px solid #222;
+  border-radius: 12px;
   margin: 8px auto;
   position: relative;
-  animation: keyFloat 0.8s infinite alternate;
 }
 
-.power-key::after {
+.key-shape::after {
   content: "";
   position: absolute;
   right: -22px;
   top: 8px;
   width: 22px;
-  height: 11px;
+  height: 10px;
   background: #333;
   border-radius: 4px;
 }
 
-@keyframes keyFloat {
-  from { transform: translateY(0); }
-  to { transform: translateY(-5px); }
-}
-
-#keyMessage {
-  margin-top: 18px;
+#keyMsg {
   font-size: 28px;
   font-weight: bold;
   color: #e53935;
-}
-
-#scene {
-  height: 330px;
-  border-radius: 22px;
-  border: 5px solid #333;
-  position: relative;
-  overflow: hidden;
-  margin-top: 16px;
-}
-
-#sceneTitle {
-  position: absolute;
-  left: 20px;
-  top: 15px;
-  font-size: 28px;
-  font-weight: bold;
-  color: white;
-  text-shadow: 2px 2px 4px #000;
-}
-
-#sceneCar {
-  position: absolute;
-  left: 35px;
-  bottom: 25px;
-  z-index: 5;
-}
-
-#sceneEvent {
-  position: absolute;
-  right: 70px;
-  bottom: 60px;
-  font-size: 86px;
-  z-index: 5;
-  animation: eventMove 0.8s infinite alternate;
-}
-
-@keyframes eventMove {
-  from { transform: translateY(0); }
-  to { transform: translateY(-8px); }
-}
-
-.scene-police {
-  background: linear-gradient(#172447 0 55%, #333 55% 100%);
-}
-
-.scene-fire {
-  background: linear-gradient(#ff7043 0 55%, #555 55% 100%);
-}
-
-.scene-ambulance {
-  background: linear-gradient(#b3e5fc 0 55%, #8bc34a 55% 100%);
-}
-
-.scene-tow {
-  background: linear-gradient(#90caf9 0 55%, #616161 55% 100%);
-}
-
-.scene-rescue {
-  background: linear-gradient(#81c784 0 55%, #795548 55% 100%);
-}
-
-.scene-special {
-  background: linear-gradient(#212121 0 55%, #424242 55% 100%);
-}
-
-#mathBox {
-  margin-top: 18px;
-  background: #fff8e1;
-  border: 4px solid #ffca28;
-  border-radius: 18px;
-  padding: 16px;
-}
-
-#question {
-  font-size: 48px;
-  font-weight: bold;
-  margin: 16px;
-}
-
-#answers {
-  display: flex;
-  justify-content: center;
-  gap: 14px;
-  flex-wrap: wrap;
-}
-
-.answer-btn {
-  font-size: 34px;
-  min-width: 105px;
-  background: #4fc3f7;
-  box-shadow: 0 4px #0288d1;
-}
-
-#resultText {
-  font-size: 30px;
-  font-weight: bold;
-  margin-top: 18px;
-  color: #e53935;
-}
-
-#nextBtn {
-  margin-top: 18px;
-  background: #66bb6a;
-  color: white;
-  box-shadow: 0 4px #2e7d32;
 }
 
 .hidden {
   display: none;
 }
 
-.success-pop {
-  animation: successPop 0.6s ease-out;
+#scene {
+  height: 330px;
+  border: 5px solid #333;
+  border-radius: 24px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 16px;
 }
 
-@keyframes successPop {
+#sceneTitle {
+  position: absolute;
+  top: 14px;
+  left: 18px;
+  color: white;
+  font-size: 28px;
+  font-weight: bold;
+  text-shadow: 2px 2px #000;
+}
+
+#heroCar {
+  position: absolute;
+  left: 50px;
+  bottom: 45px;
+  font-size: 90px;
+  animation: carBounce 0.7s infinite alternate;
+}
+
+#target {
+  position: absolute;
+  right: 80px;
+  bottom: 60px;
+  font-size: 90px;
+  animation: targetMove 0.7s infinite alternate;
+}
+
+@keyframes carBounce {
+  from { transform: translateY(0); }
+  to { transform: translateY(-8px); }
+}
+
+@keyframes targetMove {
+  from { transform: translateY(0); }
+  to { transform: translateY(-10px); }
+}
+
+.scene-police {
+  background: linear-gradient(#18294f 0 58%, #444 58% 100%);
+}
+
+.scene-fire {
+  background: linear-gradient(#ff7043 0 58%, #555 58% 100%);
+}
+
+.scene-ambulance {
+  background: linear-gradient(#b3e5fc 0 58%, #8bc34a 58% 100%);
+}
+
+.scene-tow {
+  background: linear-gradient(#90caf9 0 58%, #616161 58% 100%);
+}
+
+.scene-rescue {
+  background: linear-gradient(#81c784 0 58%, #795548 58% 100%);
+}
+
+.scene-special {
+  background: linear-gradient(#212121 0 58%, #424242 58% 100%);
+}
+
+#missionBox {
+  background: #fff8e1;
+  border: 4px solid #ffca28;
+  border-radius: 20px;
+  padding: 16px;
+}
+
+#missionContent {
+  font-size: 48px;
+  font-weight: bold;
+  margin: 14px;
+}
+
+#choices {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.choice {
+  min-width: 100px;
+  background: #4fc3f7;
+  box-shadow: 0 4px #0288d1;
+  font-size: 32px;
+}
+
+#result {
+  margin-top: 18px;
+  font-size: 30px;
+  font-weight: bold;
+  color: #e53935;
+}
+
+.pop {
+  animation: pop 0.5s ease-out;
+}
+
+@keyframes pop {
   0% { transform: scale(0.4); opacity: 0; }
   60% { transform: scale(1.3); opacity: 1; }
   100% { transform: scale(1); }
