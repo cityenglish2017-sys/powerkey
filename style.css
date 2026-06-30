@@ -148,13 +148,12 @@ button:active {
   position: absolute;
   left: 30px;
   bottom: 5px;
-  transition: transform 1.3s ease-in;
-  transform: translateX(0);
+  transition: left 1.3s ease-in;
   z-index: 5;
 }
 
-#carStage.launching {
-  transform: translateX(610px) scale(1.1);
+#carStage.launching .wheel {
+  animation: spin 0.2s linear infinite;
 }
 
 #powerKeyArea {
@@ -250,10 +249,6 @@ button:active {
 
 .wheel {
   transform-origin: center;
-}
-
-#carStage.launching .wheel {
-  animation: spin 0.2s linear infinite;
 }
 
 @keyframes spin {
