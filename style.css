@@ -95,6 +95,11 @@ button:active {
   height: 100px;
 }
 
+#carStage .car-svg {
+  width: 240px;
+  height: 130px;
+}
+
 .light {
   animation: blink 0.35s infinite alternate;
 }
@@ -144,10 +149,12 @@ button:active {
   left: 30px;
   bottom: 5px;
   transition: transform 1.3s ease-in;
+  transform: translateX(0);
+  z-index: 5;
 }
 
-.launching {
-  transform: translateX(620px) scale(1.1);
+#carStage.launching {
+  transform: translateX(610px) scale(1.1);
 }
 
 #powerKeyArea {
@@ -245,10 +252,71 @@ button:active {
   transform-origin: center;
 }
 
-.launching .wheel {
+#carStage.launching .wheel {
   animation: spin 0.2s linear infinite;
 }
 
 @keyframes spin {
   to { transform: rotate(360deg); }
+}
+
+.crash-effect {
+  position: absolute;
+  right: 35px;
+  bottom: 65px;
+  font-size: 80px;
+  animation: crashPop 0.5s ease-out;
+  z-index: 20;
+}
+
+@keyframes crashPop {
+  0% {
+    transform: scale(0.2) rotate(-20deg);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.4) rotate(10deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+.shake {
+  animation: screenShake 0.35s;
+}
+
+@keyframes screenShake {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-6px); }
+  80% { transform: translateX(6px); }
+  100% { transform: translateX(0); }
+}
+
+.speed-line {
+  position: absolute;
+  left: 10px;
+  bottom: 80px;
+  font-size: 38px;
+  opacity: 0;
+  animation: speedLine 0.9s ease-out;
+  z-index: 4;
+}
+
+@keyframes speedLine {
+  0% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(350px);
+  }
 }
