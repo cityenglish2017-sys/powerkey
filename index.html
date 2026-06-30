@@ -3,68 +3,56 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Owen Power Key Heroes</title>
+  <title>Owen Hero City</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="game">
+  <div id="app">
     <header>
-      <h1>🚨 Owen Power Key Heroes 🚨</h1>
-      <p>파워키를 장착하고 사건 현장으로 출동!</p>
+      <h1>🌟 Owen Hero City 🌟</h1>
+      <p>Power Key Adventure</p>
     </header>
 
     <section id="ageScreen" class="screen active">
-      <h2>난이도를 선택하세요</h2>
-      <div class="button-row">
-        <button onclick="selectAge(5)">5세</button>
-        <button onclick="selectAge(6)">6세</button>
-        <button onclick="selectAge(7)">7세</button>
-      </div>
+      <h2>나이를 선택하세요</h2>
+      <button onclick="selectAge(5)">👶 5세</button>
+      <button onclick="selectAge(6)">🧒 6세</button>
+      <button onclick="selectAge(7)">👦 7세</button>
     </section>
 
     <section id="garageScreen" class="screen">
-      <h2>출동 차량 선택</h2>
-      <div id="carList" class="car-grid"></div>
+      <div class="top">
+        <h2>차량을 선택하세요</h2>
+        <div>⭐ <span id="scoreText">0</span></div>
+      </div>
+      <div id="carList" class="grid"></div>
     </section>
 
     <section id="keyScreen" class="screen">
-      <div class="top-info">
-        <button onclick="showScreen('garageScreen')">← 차고</button>
-        <div>⭐ 점수: <span id="score1">0</span></div>
-      </div>
-
-      <h2 id="selectedCarName"></h2>
-      <div id="selectedCarView"></div>
-
-      <h3>파워키 색상을 선택하세요</h3>
-      <div id="keyList" class="key-grid"></div>
-
-      <button id="attachBtn" class="hidden" onclick="attachKey()">파워키 장착!</button>
-      <button id="launchBtn" class="hidden" onclick="goToScene()">🚀 출동!</button>
-
-      <div id="keyMessage"></div>
+      <h2 id="carTitle"></h2>
+      <div id="carPreview"></div>
+      <h3>파워키를 선택하세요</h3>
+      <div id="keyList" class="key-row"></div>
+      <p id="keyMsg">어떤 파워키를 꽂을까?</p>
+      <button id="startBtn" class="hidden" onclick="startMission()">🚀 출동!</button>
     </section>
 
-    <section id="sceneScreen" class="screen">
-      <div class="top-info">
-        <button onclick="showScreen('garageScreen')">← 차고</button>
-        <div>⭐ 점수: <span id="score2">0</span></div>
-      </div>
-
+    <section id="missionScreen" class="screen">
       <div id="scene">
         <div id="sceneTitle"></div>
-        <div id="sceneCar"></div>
-        <div id="sceneEvent"></div>
+        <div id="heroCar"></div>
+        <div id="target"></div>
       </div>
 
-      <div id="mathBox">
-        <h2 id="missionText"></h2>
-        <div id="question"></div>
-        <div id="answers"></div>
+      <div id="missionBox">
+        <h2 id="missionTitle"></h2>
+        <div id="missionContent"></div>
+        <div id="choices"></div>
       </div>
 
-      <div id="resultText"></div>
-      <button id="nextBtn" class="hidden" onclick="nextMission()">다음 미션!</button>
+      <div id="result"></div>
+      <button id="againBtn" class="hidden" onclick="retryMission()">다시 한번!</button>
+      <button id="nextBtn" class="hidden" onclick="nextRound()">다음 출동!</button>
     </section>
   </div>
 
