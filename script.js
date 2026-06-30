@@ -106,6 +106,7 @@ function selectCar(car) {
 
   const carStage = document.getElementById("carStage");
   carStage.className = "";
+  carStage.style.left = "30px";
   carStage.innerHTML = getCarSVG(car, true);
 
   document.querySelectorAll(".crash-effect").forEach(el => el.remove());
@@ -206,15 +207,20 @@ function launchCar() {
 
   playLaunchSound();
 
+  const carStage = document.getElementById("carStage");
+
+  carStage.classList.remove("launching");
+  carStage.style.transition = "none";
+  carStage.style.left = "30px";
+
+  void carStage.offsetWidth;
+
   setTimeout(() => {
     showSpeedLine();
 
-    const carStage = document.getElementById("carStage");
-    carStage.classList.remove("launching");
-
-    void carStage.offsetWidth;
-
     carStage.classList.add("launching");
+    carStage.style.transition = "left 1.3s ease-in";
+    carStage.style.left = "610px";
 
     setTimeout(() => {
       showCrashEffect();
@@ -227,7 +233,7 @@ function launchCar() {
       setTimeout(() => {
         selectCar(selectedCar);
       }, 2200);
-    }, 1300);
+    }, 1350);
   }, 700);
 }
 
