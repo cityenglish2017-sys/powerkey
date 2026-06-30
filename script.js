@@ -103,9 +103,14 @@ function selectCar(car) {
 
   document.getElementById("score").textContent = score;
   document.getElementById("eventIcon").textContent = car.event;
-  document.getElementById("carStage").className = "";
-  document.getElementById("carStage").style.transform = "translateX(0)";
-  document.getElementById("carStage").innerHTML = getCarSVG(car, true);
+
+  const carStage = document.getElementById("carStage");
+  carStage.className = "";
+  carStage.innerHTML = getCarSVG(car, true);
+
+  document.querySelectorAll(".crash-effect").forEach(el => el.remove());
+  document.querySelectorAll(".speed-line").forEach(el => el.remove());
+  document.getElementById("city").classList.remove("shake");
 
   document.getElementById("powerKey").innerHTML = `
     <div class="key-body" style="background:${car.keyColor};"></div>
@@ -124,6 +129,10 @@ function connectKey() {
   document.getElementById("chargeText").textContent = "파워키 연결 완료! 충전 중...";
   document.getElementById("chargeBar").style.width = "100%";
 
+  playBeep(450, 0.1);
+  setTimeout(() => playBeep(650, 0.1), 120);
+  setTimeout(() => playBeep(850, 0.1), 240);
+
   setTimeout(() => {
     createMathMission();
   }, 700);
@@ -136,17 +145,24 @@ function createMathMission() {
   let a, b, op;
 
   if (selectedAge === 5) {
-    a = random(1, 9);
-    b = random(1, 9);
+    op = Math.random() > 0.5 ? "+" : "-";
+
+    if (op === "+") {
+      a = random(1, 9);
+      b = random(1, 10 - a);
+    } else {
+      a = random(1, 10);
+      b = random(1, a);
+    }
   } else if (selectedAge === 6) {
     a = random(5, 20);
     b = random(1, 10);
+    op = Math.random() > 0.5 ? "+" : "-";
   } else {
     a = random(10, 99);
     b = random(1, 50);
+    op = Math.random() > 0.5 ? "+" : "-";
   }
-
-  op = Math.random() > 0.5 ? "+" : "-";
 
   if (op === "-" && b > a) {
     const temp = a;
@@ -177,6 +193,7 @@ function checkAnswer(num) {
     document.getElementById("mathArea").classList.add("hidden");
     document.getElementById("launchBtn").classList.remove("hidden");
     playBeep(600, 0.15);
+    setTimeout(() => playBeep(850, 0.15), 140);
   } else {
     document.getElementById("resultText").textContent = "아깝다! 다시 골라봐!";
     playBeep(180, 0.15);
@@ -187,22 +204,58 @@ function launchCar() {
   document.getElementById("launchBtn").classList.add("hidden");
   document.getElementById("resultText").textContent = "3... 2... 1... 출동!";
 
-  playBeep(900, 0.12);
+  playLaunchSound();
 
   setTimeout(() => {
+    showSpeedLine();
+
     const carStage = document.getElementById("carStage");
+    carStage.classList.remove("launching");
+
+    void carStage.offsetWidth;
+
     carStage.classList.add("launching");
 
     setTimeout(() => {
+      showCrashEffect();
+      playCrashSound();
+
       score += 1;
       document.getElementById("score").textContent = score;
-      document.getElementById("resultText").textContent = `🎉 ${selectedCar.success} ⭐ +1`;
+      document.getElementById("resultText").textContent = `💥 쾅! ${selectedCar.success} ⭐ +1`;
 
       setTimeout(() => {
         selectCar(selectedCar);
-      }, 1800);
-    }, 1400);
+      }, 2200);
+    }, 1300);
   }, 700);
+}
+
+function showSpeedLine() {
+  const city = document.getElementById("city");
+
+  const line = document.createElement("div");
+  line.className = "speed-line";
+  line.textContent = "💨💨💨";
+  city.appendChild(line);
+
+  setTimeout(() => {
+    line.remove();
+  }, 1000);
+}
+
+function showCrashEffect() {
+  const city = document.getElementById("city");
+  city.classList.add("shake");
+
+  const crash = document.createElement("div");
+  crash.className = "crash-effect";
+  crash.textContent = "💥";
+  city.appendChild(crash);
+
+  setTimeout(() => {
+    city.classList.remove("shake");
+  }, 500);
 }
 
 function goGarage() {
@@ -219,8 +272,14 @@ function makeAnswers(answer) {
 
   while (set.size < 3) {
     let wrong = answer + random(-5, 5);
-    if (wrong < 0) wrong = answer + random(1, 5);
-    if (wrong !== answer) set.add(wrong);
+
+    if (wrong < 0) {
+      wrong = answer + random(1, 5);
+    }
+
+    if (wrong !== answer) {
+      set.add(wrong);
+    }
   }
 
   return Array.from(set).sort(() => Math.random() - 0.5);
@@ -248,6 +307,19 @@ function getCarSVG(car, big = false) {
     <text x="75" y="87" font-size="18" font-weight="bold" fill="#111">${car.name}</text>
   </svg>
   `;
+}
+
+function playLaunchSound() {
+  playBeep(500, 0.08);
+  setTimeout(() => playBeep(700, 0.08), 100);
+  setTimeout(() => playBeep(900, 0.08), 200);
+  setTimeout(() => playBeep(1100, 0.12), 300);
+}
+
+function playCrashSound() {
+  playBeep(120, 0.12);
+  setTimeout(() => playBeep(90, 0.14), 100);
+  setTimeout(() => playBeep(60, 0.18), 220);
 }
 
 function playBeep(freq, duration) {
