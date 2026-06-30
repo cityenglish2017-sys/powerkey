@@ -10,7 +10,7 @@
   <div id="game">
     <header>
       <h1>🚨 Owen Power Key Heroes 🚨</h1>
-      <p>파워키를 장착하고 수학 미션을 해결하자!</p>
+      <p>파워키를 장착하고 사건 현장으로 출동!</p>
     </header>
 
     <section id="ageScreen" class="screen active">
@@ -27,40 +27,44 @@
       <div id="carList" class="car-grid"></div>
     </section>
 
-    <section id="missionScreen" class="screen">
+    <section id="keyScreen" class="screen">
       <div class="top-info">
-        <button onclick="goGarage()">← 차고</button>
-        <div>⭐ 점수: <span id="score">0</span></div>
+        <button onclick="showScreen('garageScreen')">← 차고</button>
+        <div>⭐ 점수: <span id="score1">0</span></div>
       </div>
 
-      <div id="city">
-        <div id="eventIcon"></div>
-        <div id="road">
-          <div id="carStage"></div>
-        </div>
+      <h2 id="selectedCarName"></h2>
+      <div id="selectedCarView"></div>
+
+      <h3>파워키 색상을 선택하세요</h3>
+      <div id="keyList" class="key-grid"></div>
+
+      <button id="attachBtn" class="hidden" onclick="attachKey()">파워키 장착!</button>
+      <button id="launchBtn" class="hidden" onclick="goToScene()">🚀 출동!</button>
+
+      <div id="keyMessage"></div>
+    </section>
+
+    <section id="sceneScreen" class="screen">
+      <div class="top-info">
+        <button onclick="showScreen('garageScreen')">← 차고</button>
+        <div>⭐ 점수: <span id="score2">0</span></div>
       </div>
 
-      <div id="powerKeyArea">
-        <h3>파워키 장착!</h3>
-        <div id="powerKey"></div>
-        <button id="connectBtn" onclick="connectKey()">파워키 꽂기</button>
+      <div id="scene">
+        <div id="sceneTitle"></div>
+        <div id="sceneCar"></div>
+        <div id="sceneEvent"></div>
       </div>
 
-      <div id="chargeArea">
-        <p id="chargeText">파워키를 장착하세요!</p>
-        <div class="bar">
-          <div id="chargeBar"></div>
-        </div>
-      </div>
-
-      <div id="mathArea" class="hidden">
-        <h2 id="missionTitle"></h2>
+      <div id="mathBox">
+        <h2 id="missionText"></h2>
         <div id="question"></div>
         <div id="answers"></div>
       </div>
 
-      <button id="launchBtn" class="hidden" onclick="launchCar()">🚀 발사!</button>
       <div id="resultText"></div>
+      <button id="nextBtn" class="hidden" onclick="nextMission()">다음 미션!</button>
     </section>
   </div>
 
